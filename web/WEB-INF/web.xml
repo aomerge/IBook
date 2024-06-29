@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+    
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- Definición del servlet HelloServlet -->
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.IBook.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/api/hello</url-pattern>
+    </servlet-mapping>
+
+    <!-- Definición del servlet GoodbyeServlet -->
+    <servlet>
+        <servlet-name>GoodbyeServlet</servlet-name>
+        <servlet-class>com.IBook.GoodbyeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GoodbyeServlet</servlet-name>
+        <url-pattern>/api/goodbye</url-pattern>
+    </servlet-mapping>
+
+    <!-- Definición del servlet routeservelet -->
+    <servlet>
+        <servlet-name>routeservelet</servlet-name>
+        <servlet-class>com.IBook.RouteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>routeservelet</servlet-name>
+        <url-pattern>/api/routes</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
+
+
+
