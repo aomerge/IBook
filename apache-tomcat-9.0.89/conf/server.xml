@@ -161,6 +161,9 @@
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
 
+          // change the context path to the name of the project  
+          <Context path="" docBase="IBook" reloadable="true"/>
+
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->
         <!--
