@@ -9,7 +9,7 @@ WEB_DIR="web"
 BUILD_DIR="build"
 ROUTES_DIR="$SRC_DIR/com/$PROJECT_NAME/routes"
 WAR_FILE="$BUILD_DIR/$PROJECT_NAME.war"
-HASH_FILE="file_hashes.txt"
+HASH_FILE="./conf/file_hashes.txt"
 COMPILE_ERRORS_FILE="compile_errors.txt"
 
 # Convierte las rutas de Windows a rutas de Unix para Git Bash
@@ -93,20 +93,25 @@ compile_and_deploy() {
     # Compilar todos los archivos .java en el directorio de rutas
     echo "Compilando archivos Java en $ROUTES_DIR..."
     find "$SRC_DIR" -name "*.java" > ./conf/sources.txt
-    javac -cp "$TOMCAT_HOME/lib/servlet-api.jar" -d "$BUILD_DIR" @sources.txt 2> ./conf/compile_errors.txt
+    javac -cp "$TOMCAT_HOME/lib/servlet-api.jar" -d "$BUILD_DIR" @"./conf/sources.txt" 2> ./conf/compile_errors.txt    
+
 
     # Verificar si la compilación tuvo errores
     if [ $? -ne 0 ]; then
         echo "Errores de compilación encontrados:"
-        cat compile_errors.txt
+        cat ./conf/compile_errors.txt
         exit 1
+    else
+        echo "Compilación exitosa."
+        echo "Revisando la salida de compilación..."
+        cat "./conf/compile_output.txt"
     fi
 
     # Verificar si el directorio com fue creado dentro de build
     if [ ! -d "$BUILD_DIR/com" ]; then
         echo "Errores de compilación encontrados:"
         echo "Error: Directorio de compilación no encontrado: $BUILD_DIR/com"
-        cat compile_errors.txt
+        cat ./conf/compile_errors.txt
         exit 1
     fi
 
@@ -133,12 +138,12 @@ compile_and_deploy() {
     cp "$WAR_FILE" "$TOMCAT_HOME/webapps/"
 
     # Reiniciar Tomcat
+
+    sleep 10  # Espera un momento para que Tomcat se detenga completamente
     echo "Reiniciando Tomcat..."
-
-#    ./$TOMCAT_HOME/bin/./shutdown.bat > NUL 2>&1
-    sleep 5  # Espera un momento para que Tomcat se detenga completamente
-    ./$TOMCAT_HOME/bin/catalina.bat start > NUL 2>&1
-
+    ./$TOMCAT_HOME/bin/./shutdown.bat > ./conf/tomcat-bash.txt 2>&1
+    sleep 10 
+    ./$TOMCAT_HOME/bin/startup.bat > ./conf/tomcat-bash.txt 2>&1    
 
     # Mensaje de confirmación
     echo "El servidor de Tomcat está corriendo en: http://localhost:8080/$PROJECT_NAME"
@@ -150,8 +155,8 @@ trap cleanup SIGINT
 
 # Función de limpieza
 cleanup() {
-    echo "Se recibió SIGINT, limpiando y terminando el script..."
-    ./$TOMCAT_HOME/bin/catalina.bat stop > NUL 2>&1
+    echo "Se recibió SIGINT, limpiando y terminando el script..."    
+    ./$TOMCAT_HOME/bin/./shutdown.bat > ./conf/tomcat-bash.txt 2>&1
     echo "El servidor se a detenido."
     exit 0
 }
@@ -164,9 +169,9 @@ while true; do
     calculate_hashes
     if detect_changes; then
         echo "Cambios detectados, compilando y desplegando..."
-        compile_and_deploy
-    else
-        echo "No se detectaron cambios."
+        compile_and_deploy    
+        #echo "No se detectaron cambios."
+        cat ./conf/tomcat-bash.txt        
     fi
     sleep 10  # Espera un poco antes de volver a verificar
 done

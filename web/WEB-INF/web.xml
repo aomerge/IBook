@@ -40,6 +40,16 @@
         <url-pattern>/api/routes</url-pattern>
     </servlet-mapping>
 
+   <!-- Definir books--> 
+
+   <servlet>
+        <servlet-name>Books</servlet-name>
+        <servlet-class>com.IBook.Books</servlet-class>
+   </servlet>
+   <servlet-mapping>
+        <servlet-name>Books</servlet-name>
+        <url-pattern>/api/Books</url-pattern>
+    </servlet-mapping>
 
 </web-app>
 

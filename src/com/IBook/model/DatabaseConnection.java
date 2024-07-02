@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DatabaseConnection {
     // URL de conexión, usuario y contraseña deben ser modificados según tu configuración de MySQL
-    private static final String URL = "jdbc:mysql://localhost:3306/tu_base_de_datos";
-    private static final String USER = "tu_usuario";
-    private static final String PASSWORD = "tu_contraseña";
+    private static final String URL = "jdbc:mysql://localhost:3306/IBook?useSSL=false&serverTimezone=UTC";
+    private static final String USER = "user";
+    private static final String PASSWORD = "userpassword";
 
     // Carga del driver de MySQL JDBC
     static {
@@ -21,6 +21,10 @@ public class DatabaseConnection {
     // Método para obtener la conexión
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    public static void createTable (){
+        
     }
     
 }

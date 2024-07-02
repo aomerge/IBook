@@ -1,0 +1,11 @@
+29ae5a000b743733b10be6282be8113d *src/com/IBook/controllers/ExampleController.java
+226a08dc3e085cf77974c225fc19ba91 *src/com/IBook/model/DatabaseConnection.java
+e41802569e99c5c6b5ba8c6ccdc278c7 *src/com/IBook/routes/Books.java
+3a20c3e72a48a89e97f78cbef8af11a6 *src/com/IBook/routes/GoodbyeServlet.java
+4ee0975b97105ce1109c59e136f63a2b *src/com/IBook/routes/HelloServlet.java
+b2a6bd1e293dec8a96671572cbf1b9d0 *src/com/IBook/routes/RouteServlet.java
+85277f1b22ea5b00869061dd900ff6be *src/com/IBook/structure/ExampleController.java
+b13eaf91c7451618bfb1a0029980cef1 *web/book.html
+91351116c6497111ead1803c998e254e *web/index.html
+57e4dca1d3fa5ea05e53975f5ac066f5 *web/scripts/index.js
+d779ff9a61ab4b02e654051f7f449dfe *web/WEB-INF/web.xml
