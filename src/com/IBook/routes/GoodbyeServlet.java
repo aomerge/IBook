@@ -2,6 +2,8 @@ package com.IBook;
 
 import com.IBook.controllers.ExampleController;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +13,12 @@ public class GoodbyeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ExampleController controller = new ExampleController();
-        response.getWriter().append("Goodbye from GoodbyeServlet!");
-        response.getWriter().append(controller.getBooks());
+          response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Hello world! My first servlet</h1>");
+        out.println("<h2>Products:</h2>");
+        out.println("</html></body>");        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

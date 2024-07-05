@@ -16,11 +16,97 @@
       };
     </script>
   </head>
-  <body class=" bg-black">
-    <h1 class="text-3xl text-white">IBook</h1>
-    <p>
-      This is a simple web application that demonstrates how to use the Java
-      Servlet API to create a web application that runs on a Tomcat server.
-    </p>
+  <body class="bg-black grid justify-center grid-cols-12">
+    <header class="col-start-2 col-end-12">
+      <nav class="bg-orange-500 rounded-lg p-4 flex justify-between ">
+        <section>
+          <label class="text-white mr-2" for="">Search</label>
+          <input
+            type="text"
+            id="menu-toggle"
+            class="bg-transparent border text-white focus:border-white"
+          />
+        </section>
+        <ul class="flex justify-center">
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="index.html">home</a>
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="books.html">Books</a>
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="leadBooks.html">LeadBooks</a>
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="users.html">Users</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="col-start-2 col-end-12 row-start-2 mt-5">
+      <h1 class="text-3xl text-white text-4xl font-bold text-center mb-2">IBook</h1>
+      <p class="text-white">
+        This is a simple web application that demonstrates how to use the Java
+        Servlet API to create a web application that runs on a Tomcat server.
+      </p>
+        <section class="mt-5">
+            <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
+            Books
+            </h2>
+            <ul class="grid grid-cols-3 gap-4">
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Book 1</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Book 2</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Book 3</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            </ul>
+        </section>
+        <section class="mt-5">
+            <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
+            LeadBooks
+            </h2>
+            <ul class="grid grid-cols-3 gap-4">
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">LeadBook 1</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">LeadBook 2</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">LeadBook 3</h3>
+                <p class="text-gray-700">This is a book about something</p>
+            </li>
+            </ul>
+        </section>
+        <section class="mt-5">
+            <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
+            Users
+            </h2>
+            <ul class="grid grid-cols-3 gap-4">
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">User 1</h3>
+                <p class="text-gray-700">This is a user</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">User 2</h3>
+                <p class="text-gray-700">This is a user</p>
+            </li>
+            <li class="bg-white p-4 rounded-lg">
+                <h3 class="text-xl font-bold">User 3</h3>
+                <p class="text-gray-700">This is a user</p>
+            </li>
+            </ul>
+        </section>
+    </main>
+    <script type="modeule"></script>
   </body>
 </html>

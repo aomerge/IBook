@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    @Override
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo(); // Obtiene la ruta después de "/api"
         System.out.println(pathInfo);

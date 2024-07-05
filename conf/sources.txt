@@ -1,7 +1,14 @@
+src/com/IBook/controllers/BookController.java
 src/com/IBook/controllers/ExampleController.java
+src/com/IBook/model/BookModel.java
+src/com/IBook/model/BooksModel.java
 src/com/IBook/model/DatabaseConnection.java
+src/com/IBook/model/LeadBooksModel.java
+src/com/IBook/model/UserModel.java
 src/com/IBook/routes/Books.java
 src/com/IBook/routes/GoodbyeServlet.java
 src/com/IBook/routes/HelloServlet.java
 src/com/IBook/routes/RouteServlet.java
-src/com/IBook/structure/ExampleController.java
+src/com/IBook/routes/User.java
+src/com/IBook/routes/Users.java
+src/com/IBook/utils/JsonUtils.java

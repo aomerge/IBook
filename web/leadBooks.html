@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-black grid justify-center grid-cols-12">
+    <header class="col-start-2 col-end-12">
+      <nav class="bg-orange-500 rounded-lg p-4 flex justify-between width-full">
+        <section>
+          <label class="text-white mr-2" for="">Search</label>
+          <input
+            type="text"
+            id="menu-toggle"
+            class="bg-transparent border text-white focus:border-white"
+          />
+        </section>
+        <ul class="flex justify-center">
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="index.html">home</a>
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="books.html"
+              >Books</a
+            >
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="leadBooks.html">LeadBooks</a>
+          </li>
+          <li class="mr-6">
+            <a class="text-white hover:text-gray-200" href="users.html">Users</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="col-start-2 col-end-12 row-start-2">
+      <h1 class="text-3xl text-white text-4xl font-bold text-center mb-2">
+        LeadBook
+      </h1>
+      <p class="text-white">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum
+        incidunt eaque blanditiis sapiente nobis iste, omnis fugit autem,
+        praesentium perferendis soluta, eveniet laborum animi asperiores
+        repellat. Illo, nihil obcaecati? Lorem ipsum, dolor sit amet consectetur
+        adipisicing elit. Assumenda modi atque corrupti, libero voluptate
+        deleniti neque, iste dolor mollitia eos laborum nostrum distinctio a
+        sequi natus beatae, aliquam reiciendis illo?
+      </p>
+    </main>
+  </body>
+</html>

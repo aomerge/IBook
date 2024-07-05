@@ -8,28 +8,29 @@ import javax.servlet.http.*;
 import com.IBook.controllers.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
-
 import java.net.HttpURLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.net.URL;
+import com.IBook.utils.*;
+import com.IBook.model.*;
+import com.google.gson.Gson;
 
 
 public class Books extends HttpServlet{
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ExampleController controller = new ExampleController();
-        response.getWriter().append("Goodbye from GoodbyeServlet!");
-        //System.out.println(controller.getBooks());
-        response.getWriter().write(controller.getBooks());
-          response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>Hello world! My first servlet</h1>");
-        out.println("<h2>Products:</h2>");
-        out.println("</html></body>");
+         
+        esponse.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_OK);
+        BookController Books = new BookController();
+        String json = Books.getBooks();
+        BooksModel JsonUtil = JsonUtils.jsonToBooks(json);      
+        String unescapedJsonString = json.replace("\\\"", "\"");  
+        response.getWriter().write(new Gson().toJson(unescapedJsonString));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,5 +43,9 @@ public class Books extends HttpServlet{
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Handle DELETE requests here
+    }
+
+    private void fetchBooks(HttpServletResponse response) throws IOException {
+        // Fetch books from the database
     }
 }
