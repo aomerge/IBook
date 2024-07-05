@@ -18,6 +18,9 @@ SRC_DIR=$(cygpath -u "$SRC_DIR")
 WEB_DIR=$(cygpath -u "$WEB_DIR")
 BUILD_DIR=$(cygpath -u "$BUILD_DIR")
 
+# librerias of java 
+CLASSPATH="$TOMCAT_HOME/lib/*"
+
 # Comprueba que JAVA_HOME esté configurado y sea la versión requerida
 if [ -z "$JAVA_HOME" ]; then
     echo "Error: JAVA_HOME no está configurado."
@@ -25,6 +28,7 @@ if [ -z "$JAVA_HOME" ]; then
 fi
 
 JAVA_VERSION=$("$JAVA_HOME/bin/java" -version 2>&1 | awk -F[\".] 'NR==1 {print $2}')
+
 if [ "$JAVA_VERSION" != "$JAVA_REQUIRED_VERSION" ]; then
     echo "Error: Se requiere Java 17, pero se encontró Java $JAVA_VERSION."
     exit 1
@@ -50,6 +54,7 @@ detect_changes() {
         return 0
     fi
 }
+
 minimize_console() {
     powershell.exe -Command "
     \$javaProcesses = Get-Process -Name java
@@ -93,7 +98,13 @@ compile_and_deploy() {
     # Compilar todos los archivos .java en el directorio de rutas
     echo "Compilando archivos Java en $ROUTES_DIR..."
     find "$SRC_DIR" -name "*.java" > ./conf/sources.txt
-    javac -cp "$TOMCAT_HOME/lib/servlet-api.jar" -d "$BUILD_DIR" @"./conf/sources.txt" 2> ./conf/compile_errors.txt    
+    if [$CLASSPATH == ""]; then
+        echo "$CLASSPATH"
+        echo "No se encontraron librerias"
+        exit 1
+    fi
+
+    javac -cp "$CLASSPATH" -d "$BUILD_DIR" @"./conf/sources.txt" 2> ./conf/compile_errors.txt    
 
 
     # Verificar si la compilación tuvo errores
@@ -171,7 +182,7 @@ while true; do
         echo "Cambios detectados, compilando y desplegando..."
         compile_and_deploy    
         #echo "No se detectaron cambios."
-        cat ./conf/tomcat-bash.txt        
+        cat ./conf/tomcat-bash.txt    
     fi
     sleep 10  # Espera un poco antes de volver a verificar
 done
