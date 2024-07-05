@@ -49,24 +49,14 @@
         This is a simple web application that demonstrates how to use the Java
         Servlet API to create a web application that runs on a Tomcat server.
       </p>
-        <section class="mt-5">
-            <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
+        <section class="mt-5">   
+          <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
             Books
-            </h2>
-            <ul class="grid grid-cols-3 gap-4">
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Book 1</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Book 2</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Book 3</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
-            </ul>
+          </h2> 
+          <ul id="BookList" class="grid grid-cols-3 gap-4">
+
+          </ul>        
+
         </section>
         <section class="mt-5">
             <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
@@ -107,6 +97,37 @@
             </ul>
         </section>
     </main>
-    <script type="modeule"></script>
+    <script src="./scripts/fetching.js" ></script>
+    <script type="module" >
+      console.log("Hello from the script");
+
+       // Función para mostrar los libros en el DOM
+      function displayBooks(itemBook) {        
+        const bookList = document.getElementById('BookList');
+        bookList.innerHTML = ''; // Limpiar el contenido       
+
+        itemBook.results.forEach(book => {
+          const bookItem = document.createElement('li');
+          bookItem.className = 'bg-white p-4 rounded-lg';
+          
+          const bookTitle = document.createElement('h3');
+          bookTitle.className = 'text-xl font-bold';
+          bookTitle.textContent = book.title;
+          
+          const bookDescription = document.createElement('p');
+          bookDescription.className = 'text-gray-700';
+          bookDescription.textContent = book.description;
+
+          bookItem.appendChild(bookTitle);
+          bookItem.appendChild(bookDescription);
+          bookList.appendChild(bookItem);
+        });
+
+      };
+       document.addEventListener('DOMContentLoaded', async () => {
+        const books = await fetchRequest('/Books');        
+        displayBooks(books);
+      });
+    </script>
   </body>
 </html>

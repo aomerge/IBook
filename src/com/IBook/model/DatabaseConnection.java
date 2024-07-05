@@ -1,5 +1,9 @@
 package com.IBook.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 
 public class DatabaseConnection {
@@ -8,7 +12,11 @@ public class DatabaseConnection {
     private static final String USER = "user";
     private static final String PASSWORD = "userpassword";
 
-    // Carga del driver de MySQL JDBC
+     public static void main(String[] args) {
+        executeSqlFromFolder("db");
+    }
+
+    // Carga del driver de MySQL JDBC 
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,8 +31,47 @@ public class DatabaseConnection {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public static void createTable (){
-        
+    public static void executeSqlFromFolder(String folderPath) {
+        File folder = new File(folderPath);
+        File[] listOfFiles = folder.listFiles();
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password")) {
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile() && file.getName().endsWith(".sql")) {
+                        executeSqlFile(file, conn);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void executeSqlFile(File file, Connection conn) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = br.readLine()) != null) {
+                // Ignore comments and empty lines
+                if (!line.startsWith("--") && !line.trim().isEmpty()) {
+                    sb.append(line);
+                }
+
+                // If line ends with a semicolon, execute the query
+                if (line.trim().endsWith(";")) {
+                    try (Statement stmt = conn.createStatement()) {
+                        stmt.execute(sb.toString());
+                        sb = new StringBuilder(); // Reset the StringBuilder
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }

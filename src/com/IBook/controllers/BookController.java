@@ -39,7 +39,7 @@ public class BookController implements BookInterface {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
                 String inputLine;
                 StringBuilder responseStrBuilder = new StringBuilder();
 
