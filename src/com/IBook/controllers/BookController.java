@@ -1,7 +1,9 @@
 package com.IBook.controllers;
+
 import com.IBook.model.DatabaseConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.IBook.controllers.interfaces.BookInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,17 +15,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.net.URL;
 
-public class BookController {
-    private String URLBookaApi = "https://gutendex.com";
+public class BookController implements BookInterface {
+    private String URLBookApi = "https://gutendex.com";
     HttpURLConnection connection = null;
 
-    public String getBooks(){
-        return fetchBooks();
+    public String getBooks(String page){
+        return fetchBooks(page);
     }
 
-    private String fetchBooks() {
-        // URL del servidor de libros (reemplaza con la URL real)
-        String booksUrl = this.URLBookaApi + "/books/";
+   private String fetchBooks(String page) {
+        // Construir la URL con el parámetro de página si está presente
+        String booksUrl = this.URLBookApi + "/books/";
+        if (page != null && !page.isEmpty()) {
+            booksUrl += "?page=" + page;
+        }
 
         HttpURLConnection connection = null;
         try {
@@ -45,10 +50,10 @@ public class BookController {
 
                 return responseStrBuilder.toString();
             } else {
-                return "Failed to get books: HTTP code " + responseCode;
+                return "{\"error\": \"Failed to get books: HTTP code " + responseCode + "\"}";
             }
         } catch (Exception e) {
-            return "Error: " + e.getMessage();
+            return "{\"error\": \"Error: " + e.getMessage() + "\"}";
         } finally {
             if (connection != null) {
                 connection.disconnect();

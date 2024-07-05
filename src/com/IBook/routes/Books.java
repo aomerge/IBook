@@ -17,20 +17,21 @@ import java.net.URL;
 import com.IBook.utils.*;
 import com.IBook.model.*;
 import com.google.gson.Gson;
+import com.IBook.controllers.interfaces.BookInterface;
 
 
 public class Books extends HttpServlet{
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-         
-        esponse.setContentType("application/json");
+        String pageParams = request.getParameter("page"); 
+        System.out.println("pageParams: " + pageParams);
+        response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        BookController Books = new BookController();
-        String json = Books.getBooks();
-        BooksModel JsonUtil = JsonUtils.jsonToBooks(json);      
-        String unescapedJsonString = json.replace("\\\"", "\"");  
-        response.getWriter().write(new Gson().toJson(unescapedJsonString));
+        BookInterface jsonResponse = new BookController();
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse.getBooks(pageParams));
+        out.flush();   
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
