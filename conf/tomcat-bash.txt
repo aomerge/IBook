@@ -1,6 +1,7 @@
-Using CATALINA_BASE:   "C:\Users\L490\Documents\Proyectos\java\IBook\apache-tomcat-9.0.89"
-Using CATALINA_HOME:   "C:\Users\L490\Documents\Proyectos\java\IBook\apache-tomcat-9.0.89"
-Using CATALINA_TMPDIR: "C:\Users\L490\Documents\Proyectos\java\IBook\apache-tomcat-9.0.89\temp"
-Using JRE_HOME:        "C:\Users\L490\.jdks\corretto-17.0.10"
-Using CLASSPATH:       "C:\Users\L490\Documents\Proyectos\java\IBook\apache-tomcat-9.0.89\bin\bootstrap.jar;C:\Users\L490\Documents\Proyectos\java\IBook\apache-tomcat-9.0.89\bin\tomcat-juli.jar"
-Using CATALINA_OPTS:   ""
+Using CATALINA_BASE:   /home/aomerge/Documentos/Proyects/java/IBook/apache-tomcat-9.0.89
+Using CATALINA_HOME:   /home/aomerge/Documentos/Proyects/java/IBook/apache-tomcat-9.0.89
+Using CATALINA_TMPDIR: /home/aomerge/Documentos/Proyects/java/IBook/apache-tomcat-9.0.89/temp
+Using JRE_HOME:        /usr/lib/jvm/java-17-openjdk-17.0.11.0.9-1.fc40.x86_64
+Using CLASSPATH:       /home/aomerge/Documentos/Proyects/java/IBook/apache-tomcat-9.0.89/bin/bootstrap.jar:/home/aomerge/Documentos/Proyects/java/IBook/apache-tomcat-9.0.89/bin/tomcat-juli.jar
+Using CATALINA_OPTS:   
+Tomcat started.

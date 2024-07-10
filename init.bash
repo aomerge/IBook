@@ -111,9 +111,9 @@ compile_and_deploy() {
 
     sleep 10  # Espera un momento para que Tomcat se detenga completamente
     echo "Reiniciando Tomcat..."
-    ./$TOMCAT_HOME/bin/./shutdown.bat > ./conf/tomcat-bash.txt 2>&1
+    ./$TOMCAT_HOME/bin/./shutdown.sh > ./conf/tomcat-bash.txt 2>&1
     sleep 10 
-    ./$TOMCAT_HOME/bin/startup.bat > ./conf/tomcat-bash.txt 2>&1    
+    ./$TOMCAT_HOME/bin/startup.sh > ./conf/tomcat-bash.txt 2>&1    
 
     # Mensaje de confirmación
     echo "El servidor de Tomcat está corriendo en: http://localhost:8080/$PROJECT_NAME"

@@ -1,0 +1,4 @@
+127.0.0.1 - - [09/Jul/2024:20:42:52 -0600] "GET /IBook/index.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2024:20:42:52 -0600] "GET /IBook/scripts/fetching.js HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2024:20:42:53 -0600] "GET /IBook/scripts/env.json HTTP/1.1" 200 88
+127.0.0.1 - - [09/Jul/2024:20:42:57 -0600] "GET /IBook/api//Books HTTP/1.1" 200 33848
