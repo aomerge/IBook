@@ -5,9 +5,8 @@ import java.io.*;
 import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import com.IBook.controllers.*;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet; 
 import java.net.HttpURLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +16,8 @@ import java.net.URL;
 import com.IBook.utils.*;
 import com.IBook.model.*;
 import com.google.gson.Gson;
-import com.IBook.controllers.interfaces.BookInterface;
+import com.IBook.service.*;
+import com.IBook.service.serviceDto.*;
 
 
 public class Books extends HttpServlet{
@@ -28,10 +28,11 @@ public class Books extends HttpServlet{
         System.out.println("pageParams: " + pageParams);
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        BookInterface jsonResponse = new BookController();
+        BookDTO jsonResponse = new BookService();
         PrintWriter out = response.getWriter();
         out.print(jsonResponse.getBooks(pageParams));
         out.flush();   
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

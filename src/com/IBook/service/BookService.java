@@ -1,8 +1,9 @@
-package com.IBook.controllers;
+package com.IBook.service;
 
 import com.IBook.model.DatabaseConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.IBook.service.serviceDto.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,34 +15,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.net.URL;
 
-public class ExampleController {
-    private String URLBookaApi = "https://gutendex.com/books";
+public class BookService implements BookDTO {
+    private String URLBookApi = "https://gutendex.com";
     HttpURLConnection connection = null;
 
-
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+    public String getBooks(String page){
+        return fetchBooks(page);
     }
 
-    public String getBooks(){
-        return fetchBooks();
-    }
-
-    public String getCommprovationConnection(){
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            if (conn != null && !conn.isClosed()) {
-                return "Success: Connected to the database.";
-            } else {
-                return "Error: Database connection was not established.";
-            }
-        } catch (SQLException e) {
-            return("SQLException: " + e.getMessage());
+   private String fetchBooks(String page) {
+        // Construir la URL con el parámetro de página si está presente
+        String booksUrl = this.URLBookApi + "/books/";
+        if (page != null && !page.isEmpty()) {
+            booksUrl += "?page=" + page;
         }
-    }
-
-    private String fetchBooks() {
-        // URL del servidor de libros (reemplaza con la URL real)
-        String booksUrl = "https://gutendex.com/books/";
 
         HttpURLConnection connection = null;
         try {
@@ -52,7 +39,7 @@ public class ExampleController {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
                 String inputLine;
                 StringBuilder responseStrBuilder = new StringBuilder();
 
@@ -63,10 +50,10 @@ public class ExampleController {
 
                 return responseStrBuilder.toString();
             } else {
-                return "Failed to get books: HTTP code " + responseCode;
+                return "{\"error\": \"Failed to get books: HTTP code " + responseCode + "\"}";
             }
         } catch (Exception e) {
-            return "Error: " + e.getMessage();
+            return "{\"error\": \"Error: " + e.getMessage() + "\"}";
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -75,4 +62,3 @@ public class ExampleController {
     }
     
 }
-

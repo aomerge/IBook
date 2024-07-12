@@ -1,0 +1,14 @@
+127.0.0.1 - - [11/Jul/2024:22:11:36 -0600] "GET /IBook HTTP/1.1" 302 -
+127.0.0.1 - - [11/Jul/2024:22:11:36 -0600] "GET /IBook/ HTTP/1.1" 200 5020
+127.0.0.1 - - [11/Jul/2024:22:11:36 -0600] "GET /IBook/scripts/fetching.js HTTP/1.1" 200 832
+127.0.0.1 - - [11/Jul/2024:22:11:42 -0600] "GET /IBook/scripts/env.json HTTP/1.1" 200 88
+127.0.0.1 - - [11/Jul/2024:22:11:42 -0600] "GET /favicon.ico HTTP/1.1" 200 8192
+127.0.0.1 - - [11/Jul/2024:22:11:45 -0600] "GET /IBook/api//Books HTTP/1.1" 200 33848
+127.0.0.1 - - [11/Jul/2024:22:15:22 -0600] "GET /IBook/ HTTP/1.1" 200 5020
+127.0.0.1 - - [11/Jul/2024:22:15:22 -0600] "GET /IBook/scripts/fetching.js HTTP/1.1" 200 832
+127.0.0.1 - - [11/Jul/2024:22:15:22 -0600] "GET /IBook/scripts/env.json HTTP/1.1" 200 88
+127.0.0.1 - - [11/Jul/2024:22:15:26 -0600] "GET /IBook/api//Books HTTP/1.1" 200 8206
+127.0.0.1 - - [11/Jul/2024:22:42:59 -0600] "GET /IBook/ HTTP/1.1" 200 5020
+127.0.0.1 - - [11/Jul/2024:22:42:59 -0600] "GET /IBook/scripts/fetching.js HTTP/1.1" 200 832
+127.0.0.1 - - [11/Jul/2024:22:42:59 -0600] "GET /IBook/scripts/env.json HTTP/1.1" 200 88
+127.0.0.1 - - [11/Jul/2024:22:43:05 -0600] "GET /IBook/api//Books HTTP/1.1" 200 33848

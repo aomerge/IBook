@@ -21,7 +21,7 @@ services:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - "8181:80"
+      - "9191:80"
 
 volumes:
   mysql_data:
