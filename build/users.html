@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Books</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,10 +16,10 @@
         },
       };
     </script>
-</head>
-<body class="bg-black grid justify-center grid-cols-12">
+  </head>
+  <body class="bg-black grid justify-center grid-cols-12">
     <header class="col-start-2 col-end-12">
-      <nav class="bg-orange-500 rounded-lg p-4 flex justify-between width-full ">
+      <nav class="bg-orange-500 rounded-lg p-4 flex justify-between width-full">
         <section>
           <label class="text-white mr-2" for="">Search</label>
           <input
@@ -33,7 +33,9 @@
             <a class="text-white hover:text-gray-200" href="index.html">home</a>
           </li>
           <li class="mr-6">
-            <a class="text-white hover:text-gray-200" href="books.html">Books</a>
+            <a class="text-white hover:text-gray-200" href="books.html"
+              >Books</a
+            >
           </li>
           <li class="mr-6">
             <a class="text-white hover:text-gray-200" href="leadBooks.html">LeadBooks</a>
@@ -45,11 +47,64 @@
       </nav>
     </header>
     <main class="col-start-2 col-end-12 row-start-2">
-        <h1 class="text-3xl text-white text-4xl font-bold text-center mb-2">users</h1>
+      <h1 class="text-3xl text-white text-4xl font-bold text-center mb-2">
+        Users
+      </h1>
       <p class="text-white">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum incidunt eaque blanditiis sapiente nobis iste, omnis fugit autem, praesentium perferendis soluta, eveniet laborum animi asperiores repellat. Illo, nihil obcaecati?
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda modi atque corrupti, libero voluptate deleniti neque, iste dolor mollitia eos laborum nostrum distinctio a sequi natus beatae, aliquam reiciendis illo?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum
+        incidunt eaque blanditiis sapiente nobis iste, omnis fugit autem,
+        praesentium perferendis soluta, eveniet laborum animi asperiores
+        repellat. Illo, nihil obcaecati? Lorem ipsum, dolor sit amet consectetur
+        adipisicing elit. Assumenda modi atque corrupti, libero voluptate
+        deleniti neque, iste dolor mollitia eos laborum nostrum distinctio a
+        sequi natus beatae, aliquam reiciendis illo?
       </p>
+      <section class="mt-5">
+        
+        <ul id="UsersList" class="grid grid-cols-3 gap-4">
+        
+        </ul>
+    </section>
     </main>
-</body>
+    <script src="./scripts/fetching.js" ></script>
+    <script type="module" >              
+      // function to display users
+      function displayUsers(itemUsers) {
+        const usersList = document.getElementById('UsersList');
+        usersList.innerHTML = ''; 
+
+        itemUsers.forEach(user => {
+          const userItem = document.createElement('li');
+          userItem.className = 'bg-white p-4 rounded-lg';
+
+          const userDescription = document.createElement('p');
+          userDescription.className = 'text-gray-700';
+          userDescription.textContent = user.id;
+
+          const userTitle = document.createElement('h3');
+          userTitle.className = 'text-xl font-bold';
+          userTitle.textContent = user.name + ' ' + user.lastname;            
+
+          userItem.appendChild(userTitle);
+          userItem.appendChild(userDescription);
+          usersList.appendChild(userItem);
+        });
+      };
+      // execute the fetch request and display the books
+      document.addEventListener('DOMContentLoaded', async () => {
+        const searchInput = document.getElementById('menu-toggle');
+
+        const users = await fetchRequest('/User');               
+
+        searchInput.addEventListener('input', async() => {
+          const searchTerm = searchInput.value;
+          const BooksSearch = await fetchRequest(`/Books?search=${searchTerm}`);   
+          displayBooks(BooksSearch);
+        });
+        
+        displayUsers(users);
+      });
+
+  </script>
+  </body>
 </html>

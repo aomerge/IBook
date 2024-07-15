@@ -50,6 +50,53 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum incidunt eaque blanditiis sapiente nobis iste, omnis fugit autem, praesentium perferendis soluta, eveniet laborum animi asperiores repellat. Illo, nihil obcaecati?
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda modi atque corrupti, libero voluptate deleniti neque, iste dolor mollitia eos laborum nostrum distinctio a sequi natus beatae, aliquam reiciendis illo?
       </p>
+      <section class="mt-5">           
+        <ul id="BookList" class="grid grid-cols-3 gap-4">
+
+        </ul>        
+      </section>
     </main>
+    <script src="./scripts/fetching.js" ></script>
+    <script type="module" >        
+        // function to display books
+        function displayBooks(itemBook) {        
+          const bookList = document.getElementById('BookList');
+          bookList.innerHTML = ''; // Limpiar el contenido       
+
+          itemBook.results.forEach(book => {
+            const bookItem = document.createElement('li');
+            bookItem.className = 'bg-white p-4 rounded-lg';
+            
+            const bookTitle = document.createElement('h3');
+            bookTitle.className = 'text-xl font-bold';
+            bookTitle.textContent = book.title;
+            
+            const bookDescription = document.createElement('p');
+            bookDescription.className = 'text-gray-700';
+            bookDescription.textContent = book.description;
+
+            bookItem.appendChild(bookTitle);
+            bookItem.appendChild(bookDescription);
+            bookList.appendChild(bookItem);
+          });
+
+        };
+
+        // execute the fetch request and display the books
+        document.addEventListener('DOMContentLoaded', async () => {
+          const searchInput = document.getElementById('menu-toggle');        
+          const books = await fetchRequest('/Books');                       
+
+          searchInput.addEventListener('input', async() => {
+            const searchTerm = searchInput.value;
+            const BooksSearch = await fetchRequest(`/Books?search=${searchTerm}`);   
+            displayBooks(BooksSearch);
+          });
+
+          await displayBooks(books);
+          
+        });
+
+    </script>
 </body>
 </html>

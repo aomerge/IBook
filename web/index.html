@@ -62,72 +62,139 @@
             <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
             LeadBooks
             </h2>
-            <ul class="grid grid-cols-3 gap-4">
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">LeadBook 1</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">LeadBook 2</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">LeadBook 3</h3>
-                <p class="text-gray-700">This is a book about something</p>
-            </li>
+            <ul id="LeadBooksList" class="grid grid-cols-3 gap-4">
+            
             </ul>
         </section>
         <section class="mt-5">
             <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
             Users
             </h2>
-            <ul class="grid grid-cols-3 gap-4">
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">User 1</h3>
-                <p class="text-gray-700">This is a user</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">User 2</h3>
-                <p class="text-gray-700">This is a user</p>
-            </li>
-            <li class="bg-white p-4 rounded-lg">
-                <h3 class="text-xl font-bold">User 3</h3>
-                <p class="text-gray-700">This is a user</p>
-            </li>
+            <ul id="UsersList" class="grid grid-cols-3 gap-4">
+              <li class="bg-white p-4 rounded-lg">
+                  <h3 class="text-xl font-bold">User 1</h3>
+                  <p class="text-gray-700">This is a user</p>
+              </li>
+              <li class="bg-white p-4 rounded-lg">
+                  <h3 class="text-xl font-bold">User 2</h3>
+                  <p class="text-gray-700">This is a user</p>
+              </li>
+              <li class="bg-white p-4 rounded-lg">
+                  <h3 class="text-xl font-bold">User 3</h3>
+                  <p class="text-gray-700">This is a user</p>
+              </li>
             </ul>
         </section>
     </main>
     <script src="./scripts/fetching.js" ></script>
-    <script type="module" >
-      console.log("Hello from the script");
+    <script type="module" >        
 
-       // Función para mostrar los libros en el DOM
-      function displayBooks(itemBook) {        
-        const bookList = document.getElementById('BookList');
-        bookList.innerHTML = ''; // Limpiar el contenido       
-
-        itemBook.results.forEach(book => {
-          const bookItem = document.createElement('li');
-          bookItem.className = 'bg-white p-4 rounded-lg';
+        // function display results
           
-          const bookTitle = document.createElement('h3');
-          bookTitle.className = 'text-xl font-bold';
-          bookTitle.textContent = book.title;
-          
-          const bookDescription = document.createElement('p');
-          bookDescription.className = 'text-gray-700';
-          bookDescription.textContent = book.description;
+        function displayResults(results, resultsDiv) {
+                resultsDiv.innerHTML = '';
 
-          bookItem.appendChild(bookTitle);
-          bookItem.appendChild(bookDescription);
-          bookList.appendChild(bookItem);
+                if (results.length > 0) {
+                    const ul = document.createElement('ul');
+                    results.forEach(element => {
+                        const li = document.createElement('li');
+                        li.textContent = element;
+                        ul.appendChild(li);
+                    });
+                    resultsDiv.appendChild(ul);
+                } else {
+                    resultsDiv.textContent = 'No results found';
+                }
+        }
+
+        // function to display books
+        function displayBooks(itemBook) {        
+          const bookList = document.getElementById('BookList');
+          bookList.innerHTML = ''; // Limpiar el contenido       
+
+          itemBook.results.forEach(book => {
+            const bookItem = document.createElement('li');
+            bookItem.className = 'bg-white p-4 rounded-lg';
+            
+            const bookTitle = document.createElement('h3');
+            bookTitle.className = 'text-xl font-bold';
+            bookTitle.textContent = book.title;
+            
+            const bookDescription = document.createElement('p');
+            bookDescription.className = 'text-gray-700';
+            bookDescription.textContent = book.description;
+
+            bookItem.appendChild(bookTitle);
+            bookItem.appendChild(bookDescription);
+            bookList.appendChild(bookItem);
+          });
+
+        };
+
+        // function to display lead books
+        function displayLeadBooks(itemLeadBooks) {
+          const leadBooksList = document.getElementById('LeadBooksList');
+          leadBooksList.innerHTML = ''; 
+
+          itemLeadBooks.forEach(leadBook => {
+            const leadBookItem = document.createElement('li');
+            leadBookItem.className = 'bg-white p-4 rounded-lg';
+
+            const leadBookTitle = document.createElement('h3');
+            leadBookTitle.className = 'text-xl font-bold';
+            leadBookTitle.textContent = leadBook.userId +">" + leadBook.bookId + ">" + leadBook.dueDate;
+
+            const leadBookDescription = document.createElement('p');
+            leadBookDescription.className = 'text-gray-700';
+            leadBookDescription.textContent = leadBook.conditionOnLoan;
+
+            leadBookItem.appendChild(leadBookTitle);
+            leadBookItem.appendChild(leadBookDescription);
+            leadBooksList.appendChild(leadBookItem);
+          });
+        };
+
+        // function to display users
+        function displayUsers(itemUsers) {
+          const usersList = document.getElementById('UsersList');
+          usersList.innerHTML = ''; 
+
+          itemUsers.forEach(user => {
+            const userItem = document.createElement('li');
+            userItem.className = 'bg-white p-4 rounded-lg';
+
+            const userDescription = document.createElement('p');
+            userDescription.className = 'text-gray-700';
+            userDescription.textContent = user.id;
+
+            const userTitle = document.createElement('h3');
+            userTitle.className = 'text-xl font-bold';
+            userTitle.textContent = user.name + ' ' + user.lastname;            
+
+            userItem.appendChild(userTitle);
+            userItem.appendChild(userDescription);
+            usersList.appendChild(userItem);
+          });
+        };
+        // execute the fetch request and display the books
+        document.addEventListener('DOMContentLoaded', async () => {
+          const searchInput = document.getElementById('menu-toggle');
+          const resultsDiv = document.getElementById('results');
+
+          const books = await fetchRequest('/Books');             
+          const leadBooks = await fetchRequest('/LeadBooks');
+          const users = await fetchRequest('/User');               
+
+          searchInput.addEventListener('input', async() => {
+            const searchTerm = searchInput.value;
+            const BooksSearch = await fetchRequest(`/Books?search=${searchTerm}`);   
+            displayBooks(BooksSearch);
+          });
+          await displayBooks(books);
+          await displayLeadBooks(leadBooks);
+          await displayUsers(users);
         });
 
-      };
-       document.addEventListener('DOMContentLoaded', async () => {
-        const books = await fetchRequest('/Books');        
-        displayBooks(books);
-      });
     </script>
   </body>
 </html>

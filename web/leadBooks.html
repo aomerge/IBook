@@ -59,6 +59,50 @@
         deleniti neque, iste dolor mollitia eos laborum nostrum distinctio a
         sequi natus beatae, aliquam reiciendis illo?
       </p>
+      <section class="mt-5">
+        <h2 class="text-2xl text-white text-3xl font-bold text-center mb-2">
+        LeadBooks
+        </h2>
+        <ul id="LeadBooksList" class="grid grid-cols-3 gap-4">
+        
+        </ul>
+    </section>
     </main>
+    <script src="./scripts/fetching.js" ></script>
+    <script type="module" >        
+        // function to display lead books
+        function displayLeadBooks(itemLeadBooks) {
+          const leadBooksList = document.getElementById('LeadBooksList');
+          leadBooksList.innerHTML = ''; 
+
+          itemLeadBooks.forEach(leadBook => {
+            const leadBookItem = document.createElement('li');
+            leadBookItem.className = 'bg-white p-4 rounded-lg';
+
+            const leadBookTitle = document.createElement('h3');
+            leadBookTitle.className = 'text-xl font-bold';
+            leadBookTitle.textContent = leadBook.userId +">" + leadBook.bookId + ">" + leadBook.dueDate;
+
+            const leadBookDescription = document.createElement('p');
+            leadBookDescription.className = 'text-gray-700';
+            leadBookDescription.textContent = leadBook.conditionOnLoan;
+
+            leadBookItem.appendChild(leadBookTitle);
+            leadBookItem.appendChild(leadBookDescription);
+            leadBooksList.appendChild(leadBookItem);
+          });
+        };
+
+        
+        // execute the fetch request and display the books
+        document.addEventListener('DOMContentLoaded', async () => {
+          const searchInput = document.getElementById('menu-toggle');
+  
+          const leadBooks = await fetchRequest('/LeadBooks');
+
+          await displayLeadBooks(leadBooks);          
+        });
+
+    </script>
   </body>
 </html>
