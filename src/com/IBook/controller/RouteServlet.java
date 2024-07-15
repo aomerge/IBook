@@ -1,27 +1,49 @@
 package com.IBook;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import com.IBook.service.DatabaseService;
+
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import com.IBook.service.*;
-import com.IBook.model.DatabaseConnection;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.xml.crypto.Data;
 
+public class RouteServlet extends HttpServlet {
 
-public class RouteServlet extends HttpServlet{
-    private static final long serialVersionUID = 1L;
+    private DatabaseService databaseService;
 
-   
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ExampleService controller = new ExampleService();
-        response.getWriter().append("Hello from RouteServlet!");
-        response.getWriter().append(controller.getBooks());
-        response.getWriter().append(controller.getCommprovationConnection());
+    @Override
+    public void init() throws ServletException {
+        databaseService = new DatabaseService();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String databaseName = "IBook";
+        boolean exists;        
+
+        try {
+            exists = databaseService.databaseExists(databaseName);
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+            response.getWriter().append("Error: ").append(e.getMessage());
+            return;
+        }
+
+        response.getWriter().append("Database ").append(databaseName).append(" exists: ").append(String.valueOf(exists));
+
+        try {
+            databaseService.executeSQLFile();
+            response.getWriter().append("SQL file executed successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().append("Error executing SQL file: ").append(e.getMessage());
+        }
+        
+    }
 }
+
