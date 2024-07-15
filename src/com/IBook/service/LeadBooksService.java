@@ -25,7 +25,7 @@ public class LeadBooksService implements  LeadBookDTO {
         try (
                 Connection connection = DatabaseConnection.getConnection();
                 Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM LeadBooks")
+                ResultSet rs = stmt.executeQuery("SELECT * FROM LendBooks")
             ){
                 while (rs.next()) {
                     LeadBookModel leadBook = new LeadBookModel();
@@ -52,7 +52,7 @@ public class LeadBooksService implements  LeadBookDTO {
         LeadBookModel leadBook = new LeadBookModel();
         try (
                 Connection connection = DatabaseConnection.getConnection();
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM LeadBooks WHERE id = ?");
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM LendBooks WHERE id = ?");
             ){
                 stmt.setLong(1, id);
                 ResultSet rs = stmt.executeQuery();

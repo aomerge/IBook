@@ -1,4 +1,4 @@
-package com.IBook.controller;
+package com.IBook;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,9 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LeadBooks extends HttpServlet {
+
     private  LeadBookDTO leadBookService = new LeadBooksService();
 
-    
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String leadBookId = request.getParameter("leadBookId");
