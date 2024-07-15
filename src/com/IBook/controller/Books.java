@@ -24,12 +24,18 @@ public class Books extends HttpServlet{
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         String pageParams = request.getParameter("page"); 
+
         System.out.println("pageParams: " + pageParams);
+
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
+
         BookDTO jsonResponse = new BookService();
+
         PrintWriter out = response.getWriter();
+        
         out.print(jsonResponse.getBooks(pageParams));
         out.flush();   
 
