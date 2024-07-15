@@ -8,11 +8,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.net.URL;
 
 public class ExampleService {
     private String URLBookaApi = "https://gutendex.com/books";
@@ -27,16 +28,19 @@ public class ExampleService {
         return fetchBooks();
     }
 
-    public String getCommprovationConnection(){
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            if (conn != null && !conn.isClosed()) {
-                return "Success: Connected to the database.";
-            } else {
-                return "Error: Database connection was not established.";
+    public boolean databaseExists(String databaseName) throws SQLException, NamingException {
+        boolean exists = false;
+        String query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + databaseName + "'";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            if (rs.next()) {
+                exists = true;
             }
-        } catch (SQLException e) {
-            return("SQLException: " + e.getMessage());
         }
+        return exists;
     }
 
     private String fetchBooks() {
