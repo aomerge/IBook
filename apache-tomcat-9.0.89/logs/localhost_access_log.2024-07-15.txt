@@ -1,0 +1,9 @@
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:00:02:32 -0600] "GET /IBook/api/User?userId=4 HTTP/1.1" 200 143
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:00:02:35 -0600] "GET /IBook/api/User?userId=5 HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:00:02:38 -0600] "GET /IBook/api/User?userId=6 HTTP/1.1" 200 4
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:00:02:41 -0600] "GET /IBook/api/User?userId=7 HTTP/1.1" 200 4
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:00:02:49 -0600] "GET /IBook/api/User?userId=5 HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:09:20:49 -0600] "GET /IBook/ HTTP/1.1" 200 5020
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:09:20:49 -0600] "GET /IBook/scripts/fetching.js HTTP/1.1" 200 832
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:09:20:50 -0600] "GET /IBook/scripts/env.json HTTP/1.1" 200 88
+0:0:0:0:0:0:0:1 - - [15/Jul/2024:09:20:52 -0600] "GET /IBook/api//Books HTTP/1.1" 200 33918
