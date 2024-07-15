@@ -26,17 +26,28 @@ public class Books extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String pageParams = request.getParameter("page"); 
+        String searchParams = request.getParameter("search");
+        String idsParams = request.getParameter("ids");
 
-        System.out.println("pageParams: " + pageParams);
 
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
 
         BookDTO jsonResponse = new BookService();
-
         PrintWriter out = response.getWriter();
         
-        out.print(jsonResponse.getBooks(pageParams));
+        if (pageParams != null && !pageParams.equals("")) {
+            out.print(jsonResponse.getBooksPage(pageParams));
+        } else if (searchParams != null && !searchParams.equals("")) {
+            out.print(jsonResponse.getSearchedBooks(searchParams));
+        } else if (idsParams != null && !idsParams.equals("")) {
+            out.print(jsonResponse.getBookById(idsParams));
+        } else{
+            out.print(jsonResponse.getBooks());
+        }
+
+
+
         out.flush();   
 
     }

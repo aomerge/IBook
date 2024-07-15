@@ -19,15 +19,37 @@ public class BookService implements BookDTO {
     private String URLBookApi = "https://gutendex.com";
     HttpURLConnection connection = null;
 
-    public String getBooks(String page){
-        return fetchBooks(page);
+    public String getBooks(){
+        return fetchBooks(null, null, null);
     }
 
-   private String fetchBooks(String page) {
+    public String getBooksPage(String page){
+        return fetchBooks(page, null, null);
+    }
+
+    public String getBookById(String id){
+        return fetchBooks(null, null, id);
+    }
+
+    public String getSearchedBooks(String search){
+        return fetchBooks(null, search, null);
+    }
+
+
+    private String fetchBooks(String page, String search, String ids ) {
         // Construir la URL con el parámetro de página si está presente
         String booksUrl = this.URLBookApi + "/books/";
+
         if (page != null && !page.isEmpty()) {
             booksUrl += "?page=" + page;
+        }
+
+        if (search != null && !search.isEmpty()) {
+            booksUrl += "?search=" + search;
+        }
+
+        if (ids != null && !ids.isEmpty()) {
+            booksUrl += "?ids=" + ids;
         }
 
         HttpURLConnection connection = null;
