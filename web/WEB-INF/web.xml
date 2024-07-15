@@ -40,7 +40,16 @@
         <url-pattern>/api/routes</url-pattern>
     </servlet-mapping>
 
-   <!-- Definir books--> 
+    <!-- definition users-->
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>com.IBook.User</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/api/User</url-pattern>
+    </servlet-mapping>
+   <!-- Definition books--> 
 
    <servlet>
         <servlet-name>Books</servlet-name>
@@ -50,6 +59,23 @@
         <servlet-name>Books</servlet-name>
         <url-pattern>/api/Books</url-pattern>
     </servlet-mapping>
+
+    <!-- Definition LeadBooks-->
+    <servlet>
+        <servlet-name>LeadBooks</servlet-name>
+        <servlet-class>com.IBook.LeadBooks</servlet-class>
+   </servlet>
+   <servlet-mapping>
+        <servlet-name>LeadBooks</servlet-name>
+        <url-pattern>/api/LeadBooks</url-pattern>
+    </servlet-mapping>
+
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/IBookDB</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
 </web-app>
 
